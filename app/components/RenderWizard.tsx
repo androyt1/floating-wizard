@@ -1,10 +1,12 @@
 "use client";
 import { useGLTF, Environment, useProgress, Html } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { Mesh } from "three";
 
 import { forwardRef, useRef, Suspense } from "react";
 
-const Wizard = forwardRef(function MyWizard(props, ref) {
+const Wizard = forwardRef(function MyWizard(props: any, ref: any) {
+    console.log("props", props);
     const model = useGLTF("/models/wizard.glb");
     useFrame((state, _) => {
         ref.current.position.y = -2 + Math.sin(state.clock.elapsedTime) * 0.3;
@@ -22,7 +24,7 @@ function Loader() {
 }
 
 const RenderWizard = () => {
-    const modelRef = useRef();
+    const modelRef = useRef<Mesh>(null!);
 
     return (
         <Canvas className='h-screen'>
